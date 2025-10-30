@@ -6,6 +6,28 @@ let score, answer, level;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
 
+// var date = new DateTransfer();
+// var dom = date.getDate();
+// var dow = date.getDay();
+// var month = date.getMonth();
+// var year = date.getFullYear();
+// var mins = date.getMinutes();
+// var hour = date.getHourse();
+// varamPm = "a.m.";
+
+// if(hour>=12){
+//     hour = hour-12;
+//     amPm = "p.m.";
+// }
+
+// if(hour == 0)
+//     hour = 12;
+
+// if(mins<10)
+//     mins = "0"+mins;
+
+// alert("Today is " + dow + "," + month + " " + dom + ", " + year + ". The time is " + hour + ":" + mins + " " + ampPm);
+
 // event listeners
 playBtn.addEventListener("click", play);
 guessBtn.addEventListener("click", makeGuess);
