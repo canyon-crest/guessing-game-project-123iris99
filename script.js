@@ -52,7 +52,6 @@ function time(){
     return str;
 }
 
-
 function play(){
     playBtn.disabled = true;
     guessBtn.disabled = false;
@@ -64,7 +63,7 @@ function play(){
         }
     }
     answer = Math.floor(Math.random()*level)+1;
-    msg.textContent = "Guess a number between 1-" + level;
+    msg.textContent = "Hi! " + " Guess a number between 1-" + level;
     guess.placeholder = answer;
     score = 0;
 }
