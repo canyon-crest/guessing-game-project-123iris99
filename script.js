@@ -32,12 +32,26 @@ const scoreArr = [];
 playBtn.addEventListener("click", play);
 guessBtn.addEventListener("click", makeGuess);
 
+function displayTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds
+    document.getElementById('clock').textContent = myTime;
+    }
+
+    displayTime();
+    setInterval(displayTime, 1000);
+
 function time(){
     let d = new Date();
 // concatenate date and time
-    let str = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
+    let str = "Date: " + (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
     return str;
 }
+
 
 function play(){
     playBtn.disabled = true;
