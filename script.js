@@ -2,7 +2,8 @@
 date.textContent = time();
 
 // global variables/constants
-let score, answer, level;
+
+let score, answer, level, userName;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
 
@@ -63,7 +64,13 @@ function play(){
         }
     }
     answer = Math.floor(Math.random()*level)+1;
-    msg.textContent = "Hi! " + " Guess a number between 1-" + level;
+    userName = document.getElementById('messageInput').value;
+        if (userName == ""){
+            msg.textContent = "Please enter a name"
+        }
+        else{
+    msg.textContent = "Hi " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! " + " Guess a number between 1-" + level;
+    }
     guess.placeholder = answer;
     score = 0;
 }
@@ -98,13 +105,12 @@ function reset(){
     }
 }
 function updateScore(){
-    scoreArr.push(score); //adds current score to array of scores
+ scoreArr.push(score); //adds current score to array of scores
     wins.textContent = "Total wins: " + scoreArr.length;
     let sum = 0;
     scoreArr.sort((a, b) => a - b); // sorts array in ascending order
     //leaderboard
     const lb = document.getElementsByName("leaderboard");
-
 
     for(let i=0; i<scoreArr.length; i++){
         sum += scoreArr[i];
