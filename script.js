@@ -90,9 +90,15 @@ function makeGuess(){
         msg.textContent = "Too high, guess again";
     }
     else{
-        msg.textContent = "Correct! You guessed in " + score + " tries";
+        if(score<=2){
+            msg.textContent = "Correct! You guessed in " + score + " tries";
+        }
+        else if (score<=4 || score>=3){
+
+        }
         reset();
         updateScore();
+
     }
     const myHint = document.getElementsByName("cb");
     for(let i=0; i<myHint.length; i++){
