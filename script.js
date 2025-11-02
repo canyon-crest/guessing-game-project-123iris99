@@ -77,122 +77,220 @@ function displayTime() { //date
 function time(){ //time
     let d = new Date();
     if((d.getMonth() + 1)==1){
-        if((d.getDate())==1){
-    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==2){
-    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==3){
-    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())>=4 && (d.getDate())<=20){
+        if((d.getDate())>=4 && (d.getDate())<=20){
     let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
     return str;
     }
-        else if((d.getDate())==21){
+        else if((d.getDate().length-1)==1){
     let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
     return str;
     }
-        else if((d.getDate())==22){
+        else if((d.getDate().length-1)==2){
     let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
     return str;
     }
-        else if((d.getDate())==23){
+        else if((d.getDate().length-1)==3){
     let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())>=24 && (d.getDate())<=30){
-    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==31){
-    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
     return str;
     }
     }
     else if((d.getMonth() + 1)==2){
-    if((d.getDate())==1){
-    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "February " + d.getDate() + "th, " + d.getFullYear();
     return str;
     }
-        else if((d.getDate())==2){
-    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "February " + d.getDate() + "st, " + d.getFullYear();
     return str;
     }
-        else if((d.getDate())==3){
-    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "February " + d.getDate() + "nd, " + d.getFullYear();
     return str;
     }
-        else if((d.getDate())>=4 && (d.getDate())<=20){
-    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==21){
-    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==22){
-    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==23){
-    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())>=24 && (d.getDate())<=30){
-    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
-    return str;
-    }
-        else if((d.getDate())==31){
-    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "February " + d.getDate() + "rd, " + d.getFullYear();
     return str;
     }
     }
     else if((d.getMonth() + 1)==3){
-    let str = "Date: " + "March " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "March " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "March " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "March " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "March " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==4){
-    let str = "Date: " + "April " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "April " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "April " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "April " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "April " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==5){
-    let str = "Date: " + "May " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "May " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "May " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "May " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "May " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==6){
-    let str = "Date: " + "June " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "June " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "June " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "June " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "June " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==7){
-    let str = "Date: " + "July " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "July " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "July " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "July " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "July " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==8){
-    let str = "Date: " + "August " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "August " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "August " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "August " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "August " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==9){
-    let str = "Date: " + "September " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "September " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "September " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "September " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "September " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
     else if((d.getMonth() + 1)==10){
-    let str = "Date: " + "October " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "October " + d.getDate() + "th, " + d.getFullYear();
     return str;
     }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "October " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "October " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "October " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
+    }
     else if((d.getMonth() + 1)==11){
-        if((d.getDate())==2){
-    let str = "Date: " + "November " + d.getDate() + "nd, " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "November " + d.getDate() + "th, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "November " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "November " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "November " + d.getDate() + "rd, " + d.getFullYear();
     return str;
     }
     }
     else if((d.getMonth() + 1)==12){
-    let str = "Date: " + "December " + d.getDate() + ", " + d.getFullYear()
+        if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "December " + d.getDate() + "th, " + d.getFullYear();
     return str;
+    }
+        else if(d.getDate()==1 || d.getDate()==21 || d.getDate()==31){
+    let str = "Date: " + "December " + d.getDate() + "st, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==2 || d.getDate()==22){
+    let str = "Date: " + "December " + d.getDate() + "nd, " + d.getFullYear();
+    return str;
+    }
+        else if(d.getDate()==3 || d.getDate()==23){
+    let str = "Date: " + "December " + d.getDate() + "rd, " + d.getFullYear();
+    return str;
+    }
     }
 
 }
