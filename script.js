@@ -7,14 +7,42 @@ let score, answer, level, userName;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
 
-// var date = new DateTransfer();
+
+// var date = new Date();
 // var dom = date.getDate();
 // var dow = date.getDay();
 // var month = date.getMonth();
 // var year = date.getFullYear();
 // var mins = date.getMinutes();
-// var hour = date.getHourse();
-// varamPm = "a.m.";
+// var hour = date.getHours();
+// var amPm = "a.m.";
+
+// switch(dow)
+// {
+//     case 0: dow = "Sunday"; break;
+//     case 1: dow = "Monday"; break;
+//     case 2: dow = "Tuesday"; break;
+//     case 3: dow = "Wednesday"; break;
+//     case 4: dow = "Thursday"; break;
+//     case 5: dow = "Friday"; break;
+//     case 6: dow = "Saturday"; break;
+// }
+
+// switch(month)
+// {
+//     case 0: month = "January"; break;
+//     case 1: month = "February"; break;
+//     case 2: month = "March"; break;
+//     case 3: month = "April"; break;
+//     case 4: month = "May"; break;
+//     case 5: month = "June"; break;
+//     case 6: month = "July"; break;
+//     case 7: month = "August"; break;
+//     case 8: month = "September"; break;
+//     case 9: month = "October"; break;
+//     case 10: month = "November"; break;
+//     case 11: month = "December"; break;
+// }
 
 // if(hour>=12){
 //     hour = hour-12;
@@ -27,11 +55,12 @@ const scoreArr = [];
 // if(mins<10)
 //     mins = "0"+mins;
 
-// alert("Today is " + dow + "," + month + " " + dom + ", " + year + ". The time is " + hour + ":" + mins + " " + ampPm);
+// alert("Today is " + dow + "," + month + " " + dom + ", " + year + ". The time is " + hour + ":" + mins + " " + amPm);
 
 // event listeners
 playBtn.addEventListener("click", play);
 guessBtn.addEventListener("click", makeGuess);
+
 
 function displayTime() { //date
     const now = new Date();
@@ -42,15 +71,130 @@ function displayTime() { //date
     const myTime = "Time: " + hours + ":" + minutes + ":" + seconds
     document.getElementById('clock').textContent = myTime;
     }
-
     displayTime();
     setInterval(displayTime, 1000);
 
 function time(){ //time
     let d = new Date();
-// concatenate date and time
-    let str = "Date: " + (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
+    if((d.getMonth() + 1)==1){
+        if((d.getDate())==1){
+    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
     return str;
+    }
+        else if((d.getDate())==2){
+    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==3){
+    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==21){
+    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==22){
+    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==23){
+    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())>=24 && (d.getDate())<=30){
+    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==31){
+    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+    return str;
+    }
+    }
+    else if((d.getMonth() + 1)==2){
+    if((d.getDate())==1){
+    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==2){
+    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==3){
+    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())>=4 && (d.getDate())<=20){
+    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==21){
+    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==22){
+    let str = "Date: " + "January " + d.getDate() + "nd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==23){
+    let str = "Date: " + "January " + d.getDate() + "rd, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())>=24 && (d.getDate())<=30){
+    let str = "Date: " + "January " + d.getDate() + "th, " + d.getFullYear()
+    return str;
+    }
+        else if((d.getDate())==31){
+    let str = "Date: " + "January " + d.getDate() + "st, " + d.getFullYear()
+    return str;
+    }
+    }
+    else if((d.getMonth() + 1)==3){
+    let str = "Date: " + "March " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==4){
+    let str = "Date: " + "April " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==5){
+    let str = "Date: " + "May " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==6){
+    let str = "Date: " + "June " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==7){
+    let str = "Date: " + "July " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==8){
+    let str = "Date: " + "August " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==9){
+    let str = "Date: " + "September " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==10){
+    let str = "Date: " + "October " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+    else if((d.getMonth() + 1)==11){
+        if((d.getDate())==2){
+    let str = "Date: " + "November " + d.getDate() + "nd, " + d.getFullYear()
+    return str;
+    }
+    }
+    else if((d.getMonth() + 1)==12){
+    let str = "Date: " + "December " + d.getDate() + ", " + d.getFullYear()
+    return str;
+    }
+
 }
 
 function play(){
