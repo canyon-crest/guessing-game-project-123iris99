@@ -93,7 +93,26 @@ function makeGuess(){
         reset();
         updateScore();
     }
-}
+    while (score>=1){
+        if(Math.abs(userGuess-answer)<=1){
+        msg.textContent += " very hot";
+        }
+        else if(Math.abs(userGuess-answer0<=3)){
+        msg.textContent += "hot";
+        }
+        else if(Math.abs(userGuess-answer0<5)){
+        msg.textContent += "warm";
+        }
+        else if(Math.abs(userGuess-answer0<7)){
+        msg.textContent += "lukewarm";
+        }
+        else{
+        msg.textContent += "cold";
+        }
+    return;
+    }
+    }
+
 function reset(){
     guessBtn.disabled = true;
     guess.value = "";
