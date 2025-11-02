@@ -91,10 +91,13 @@ function makeGuess(){
     }
     else{
         if(score<=2){
-            msg.textContent = "Correct! You guessed in " + score + " tries";
+            msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
         }
-        else if (score<=4 || score>=3){
-
+        else if (score<=4 && score>=3){
+            msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is okay";
+        }
+        else if (score>=5){
+            msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is bad";
         }
         reset();
         updateScore();
@@ -103,7 +106,6 @@ function makeGuess(){
     const myHint = document.getElementsByName("cb");
     for(let i=0; i<myHint.length; i++){
         if(myHint[i].checked){
-       
             if(Math.abs(userGuess-answer)==1){
             msg.textContent += ". Your answer is very hot";
             }
@@ -118,7 +120,7 @@ function makeGuess(){
             }
             else{
                 if(answer!=userGuess){
-            msg.textContent += " cold";
+            msg.textContent += ". Your answer is cold";
                 }
             }
     return;
