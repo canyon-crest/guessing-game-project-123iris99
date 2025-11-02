@@ -68,8 +68,15 @@ function displayTime() { //date
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
 
-    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds
+    if(hours<=12 || hours>=1){
+    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
     document.getElementById('clock').textContent = myTime;
+    }
+    else{
+        let hours = hours-12
+    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" pm"
+    document.getElementById('clock').textContent = myTime;
+    }
     }
     displayTime();
     setInterval(displayTime, 1000);
