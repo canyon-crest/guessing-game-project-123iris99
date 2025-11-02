@@ -33,7 +33,7 @@ const scoreArr = [];
 playBtn.addEventListener("click", play);
 guessBtn.addEventListener("click", makeGuess);
 
-function displayTime() {
+function displayTime() { //date
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -46,7 +46,7 @@ function displayTime() {
     displayTime();
     setInterval(displayTime, 1000);
 
-function time(){
+function time(){ //time
     let d = new Date();
 // concatenate date and time
     let str = "Date: " + (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()
