@@ -309,29 +309,6 @@ function time(){ //time
     }
 }
 
-////////////////////////////////////
-document.getElementById("myBtn").addEventListener("click", stop);
-let start = new Date().getTime();
-
-function useTimer(){
-    let stop = new Date().getTime();
-    let time = (stop - start)/1000;
-    document.getElementById("myTimer").innerHTML = time.toFixed(2);
-}
-let timer = setInterval(useTimer, 10);
-let flag = true;
-function stop(){
-    if(flag){
-        clearInterval(timer);
-        myBtn.innerHTML = "Start";
-    }
-    else{
-        timer = setInterval(useTimer, 10);
-        myBtn.innerHTML = "Stop";
-    }
-    flag = !flag;
-}
-
 function play(){
     playBtn.disabled = true;
     cb1.disabled = true;
@@ -354,6 +331,30 @@ function play(){
     guess.placeholder = answer;
     score = 0;
 }
+
+////////////////////////////////////
+// document.getElementById("playBtn").addEventListener("click", stop);
+// let start = new Date().getTime();
+
+// function useTimer(){
+//     let stop = new Date().getTime();
+//     let time = (stop - start)/1000;
+//     document.getElementById("myTimer").innerHTML = time.toFixed(2);
+// }
+// let timer = setInterval(useTimer, 10);
+// function stop(){
+//         if(playBtn.disabled=true){
+//             timer = setInterval(useTimer, 10);
+//             document.getElementById("myTimer").innerHTML = "00:00:00"
+//         }
+
+//     else{
+//         clearInterval(timer);
+//         document.getElementById("myTimer").innerHTML = time.toFixed(2);
+//     }
+// }
+
+/////////////////////////
 
 function makeGuess(){
     let userGuess = parseInt(guess.value);
