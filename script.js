@@ -67,28 +67,27 @@ function displayTime() { //date
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
-
     if(hours==12){
     const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" pm"
     document.getElementById('clock').textContent = myTime;
     }
     else if(hours==0){
-        let hours = hours-12
-    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
+    const myTime = "Time: 12" + ":" + minutes + ":" + seconds +" am"
     document.getElementById('clock').textContent = myTime;
     }
     else if(hours<12 || hours>=1){
-    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
+    const myTime = "Time: " + (hours-12) + ":" + minutes + ":" + seconds +" pm"
     document.getElementById('clock').textContent = myTime;
     }
-    else{
-        let hours = hours-12
-    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" pm"
+    else if(hours>=12 && hours<=23){
+    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
     document.getElementById('clock').textContent = myTime;
     }
     }
     displayTime();
     setInterval(displayTime, 1000);
+
+////////////////////////////////////////
 
 function time(){ //time
     let d = new Date();
@@ -308,7 +307,29 @@ function time(){ //time
     return str;
     }
     }
+}
 
+////////////////////////////////////
+document.getElementById("myBtn").addEventListener("click", stop);
+let start = new Date().getTime();
+
+function useTimer(){
+    let stop = new Date().getTime();
+    let time = (stop - start)/1000;
+    document.getElementById("myTimer").innerHTML = time.toFixed(2);
+}
+let timer = setInterval(useTimer, 10);
+let flag = true;
+function stop(){
+    if(flag){
+        clearInterval(timer);
+        myBtn.innerHTML = "Start";
+    }
+    else{
+        timer = setInterval(useTimer, 10);
+        myBtn.innerHTML = "Stop";
+    }
+    flag = !flag;
 }
 
 function play(){
