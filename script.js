@@ -7,56 +7,6 @@ let score, answer, level, userName;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
 
-
-// var date = new Date();
-// var dom = date.getDate();
-// var dow = date.getDay();
-// var month = date.getMonth();
-// var year = date.getFullYear();
-// var mins = date.getMinutes();
-// var hour = date.getHours();
-// var amPm = "a.m.";
-
-// switch(dow)
-// {
-//     case 0: dow = "Sunday"; break;
-//     case 1: dow = "Monday"; break;
-//     case 2: dow = "Tuesday"; break;
-//     case 3: dow = "Wednesday"; break;
-//     case 4: dow = "Thursday"; break;
-//     case 5: dow = "Friday"; break;
-//     case 6: dow = "Saturday"; break;
-// }
-
-// switch(month)
-// {
-//     case 0: month = "January"; break;
-//     case 1: month = "February"; break;
-//     case 2: month = "March"; break;
-//     case 3: month = "April"; break;
-//     case 4: month = "May"; break;
-//     case 5: month = "June"; break;
-//     case 6: month = "July"; break;
-//     case 7: month = "August"; break;
-//     case 8: month = "September"; break;
-//     case 9: month = "October"; break;
-//     case 10: month = "November"; break;
-//     case 11: month = "December"; break;
-// }
-
-// if(hour>=12){
-//     hour = hour-12;
-//     amPm = "p.m.";
-// }
-
-// if(hour == 0)
-//     hour = 12;
-
-// if(mins<10)
-//     mins = "0"+mins;
-
-// alert("Today is " + dow + "," + month + " " + dom + ", " + year + ". The time is " + hour + ":" + mins + " " + amPm);
-
 // event listeners
 playBtn.addEventListener("click", play);
 guessBtn.addEventListener("click", makeGuess);
@@ -311,6 +261,7 @@ function time(){ //time
 
 function play(){
     playBtn.disabled = true;
+    giveUpBtn.disabled = false;
     cb1.disabled = true;
     guessBtn.disabled = false;
     guess.disabled = false;
@@ -332,6 +283,11 @@ function play(){
     score = 0;
 }
 
+giveUpBtn.addEventListener("click", giveUp);
+function giveUp(){
+        msg.textContent = "Your score was " + score + ". Nice try!";
+
+    }
 ////////////////////////////////////
 // document.getElementById("playBtn").addEventListener("click", stop);
 // let start = new Date().getTime();
@@ -417,6 +373,7 @@ function reset(){
     guess.placeholder = "";
     guess.disabled = true;
     playBtn.disabled = false;
+    giveUpBtn.disabled = false;
     cb1.disabled = false;
     for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = false;
