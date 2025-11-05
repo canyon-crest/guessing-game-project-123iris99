@@ -5,8 +5,8 @@ date.textContent = time();
 
 let score, answer, level, userName;
 let timerInterval, startTime;
-let bestTime = localStorage.getItem('bestGuessingTime')
-document.getElementById('bestTime').textContent = bestTime;
+let bestTime = localStorage.getItem('bestGuessingTime') || 'N/A'; // Store/retrieve best time
+document.getElementById('best-time').textContent = bestTime;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
 const timerArr = [];
@@ -31,11 +31,11 @@ function displayTime() { //date
     document.getElementById('clock').textContent = myTime;
     }
     else if(hours<12 || hours>=1){
-    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
+    const myTime = "Time: " + (hours-12) + ":" + minutes + ":" + seconds +" pm"
     document.getElementById('clock').textContent = myTime;
     }
-    else if(hours>12 || hours<=23){
-    const myTime = "Time: " + (hours-12) + ":" + minutes + ":" + seconds +" pm"
+    else if(hours>=12 && hours<=23){
+    const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
     document.getElementById('clock').textContent = myTime;
     }
     }
@@ -314,30 +314,41 @@ function giveUpGame() {
 
 function updateTimer() {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    timerDisplay.textContent = elapsedTime;
+    timerDisplay.textContent = `${elapsedTime}s`;
 }
 
 const finalTime = Math.floor((Date.now() - startTime) / 1000);
 function myTimer(){
- timerArr.push(elapsedTime); //adds current score to timer array
-    bestTime.textContent = "Total wins: " + scoreArr.length;
-    let sum = 0;
-    scoreArr.sort((a, b) => a - b); // sorts array in ascending order
-    //leaderboard
-    const lb = document.getElementsByName("leaderboard");
-
-    for(let i=0; i<scoreArr.length; i++){
-        sum += scoreArr[i];
-        if(i<lb.length){
-            lb[i].textContent = scoreArr[i];
-        }
-    }
-    let avg = sum/scoreArr.length;
-    if(msg.textContent = "Game Over! The answer was: " + answer){
-    avgScore.textContent = "Average Score: " + Math.avg(avg + level);
-}
+    timerArr.push(finalTime);
+    timerArr.sort((a, b) => a - b);
+    fastTime.textContent = "Fastest Time: " + timerArr[0];
 }
 
+
+////////////////////////////////////
+// document.getElementById("playBtn").addEventListener("click", stop);
+// let start = new Date().getTime();
+
+// function useTimer(){
+//     let stop = new Date().getTime();
+//     let time = (stop - start)/1000;
+//     document.getElementById("myTimer").innerHTML = time.toFixed(2);
+// }
+// let timer = setInterval(useTimer, 10);
+// function stop(){
+//     while()
+//         if(playBtn.disabled=true){
+//             timer = setInterval(useTimer, 10);
+//             document.getElementById("myTimer").innerHTML = "00:00:00"
+//         }
+
+//     else{
+//         clearInterval(timer);
+//         document.getElementById("myTimer").innerHTML = time.toFixed(2);
+//     }
+// }
+
+/////////////////////////
 
 function makeGuess(){
     let userGuess = parseInt(guess.value);
@@ -357,19 +368,17 @@ function makeGuess(){
             msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
-        myTimer()
         }
         else if (score<=4 && score>=3){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is okay";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
-        myTimer();
         }
         else if (score>=5){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is bad";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
-            myTimer()
+    
         }
         reset();
         updateScore();
@@ -434,8 +443,3 @@ function updateScore(){
     avgScore.textContent = "Average Score: " + Math.avg(avg + level);
 }
 }
-
-
-
-
-
