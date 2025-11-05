@@ -4,8 +4,10 @@ date.textContent = time();
 // global variables/constants
 
 let score, answer, level, userName;
+let timerInterval, startTime;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
+const timerDisplay = document.getElementById('timer');
 
 // event listeners
 playBtn.addEventListener("click", play);
@@ -281,13 +283,37 @@ function play(){
     }
     guess.placeholder = answer;
     score = 0;
+    startTime = Date.now();
+    clearInterval(timerInterval);
+    timerInterval = setInterval(updateTimer, 1000);
 }
 
-giveUpBtn.addEventListener("click", giveUp);
-function giveUp(){
-        msg.textContent = "Your score was " + score + ". Nice try!";
+const giveUpButton = document.getElementById('giveUpBtn');
+const gameStatus = document.getElementById('gameStatus');
+giveUpButton.addEventListener('click', giveUpGame)
 
+function giveUpGame() {
+    msg.textContent = "Game Over! The answer was: " + answer;
+    giveUpButton.disabled = true;
+    if(msg.textContent = "Game Over! The answer was: " + answer){
+        playBtn.disabled = false;
+    giveUpBtn.disabled = true;
+    cb1.disabled = false;
+    guessBtn.disabled = true;
+    guess.disabled = true;
+        for(let i=0; i<levelArr.length; i++){
+        levelArr[i].disabled = false;
     }
+    }
+}
+
+
+function updateTimer() {
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    timerDisplay.textContent = `${elapsedTime}s`;
+}
+
+
 ////////////////////////////////////
 // document.getElementById("playBtn").addEventListener("click", stop);
 // let start = new Date().getTime();
@@ -299,6 +325,7 @@ function giveUp(){
 // }
 // let timer = setInterval(useTimer, 10);
 // function stop(){
+//     while()
 //         if(playBtn.disabled=true){
 //             timer = setInterval(useTimer, 10);
 //             document.getElementById("myTimer").innerHTML = "00:00:00"
@@ -328,12 +355,18 @@ function makeGuess(){
     else{
         if(score<=2){
             msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
         }
         else if (score<=4 && score>=3){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is okay";
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
         }
         else if (score>=5){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is bad";
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
         }
         reset();
         updateScore();
@@ -394,5 +427,7 @@ function updateScore(){
         }
     }
     let avg = sum/scoreArr.length;
-    avgScore.textContent = "Average Score: " + avg.toFixed(2);
+    if(msg.textContent = "Game Over! The answer was: " + answer){
+    avgScore.textContent = "Average Score: " + Math.avg(avg + level);
+}
 }

@@ -16,16 +16,17 @@
     <input type="radio" name="level" id="h" value="100"><label for="h">Hard</label>
 
     <button id="playBtn">Play</button>
-    <button id="giveUpBtn">Give up</button>
 
     <input type="checkbox" name="cb" id="cb1" value="hint" abled><label for="cb1">Hint</label>
 
-    <p id="myTimer">???</p>
+    <p id="timer-display">???</p>
+    <p>Time elapsed: <span id="timer">0s</span></p>
 
     <h3 id="msg">Select a Level</h3>
     <input type="text" id="guess" disabled>
     <button id="guessBtn" disabled>Guess</button>
     <button id="giveUpBtn" disabled>Give Up</button>
+    <div id="gameStatus"></div>
 
     <h3>Stats</h3>
     <p id="wins">Total wins: 0</p>
