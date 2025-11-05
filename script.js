@@ -5,7 +5,7 @@ date.textContent = time();
 
 let score, answer, level, userName;
 let timerInterval, startTime;
-let bestTime = localStorage.getItem('bestGuessingTime') || 'N/A'; // Store/retrieve best time
+let bestTime = localStorage.getItem('bestGuessingTime') || 'N/A';
 document.getElementById('best-time').textContent = bestTime;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
@@ -44,7 +44,7 @@ function displayTime() { //date
 
 ////////////////////////////////////////
 
-function time(){ //time
+function time(){
     let d = new Date();
     if((d.getMonth() + 1)==1){
         if((d.getDate())>=4 && (d.getDate())<=20){
@@ -309,7 +309,7 @@ function play(){
 
 function updateTimer() {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    timerDisplay.textContent = `${elapsedTime}s`;
+    timerDisplay.textContent = elapsedTime + "s";
 }
 
 const finalTime = Math.floor((Date.now() - startTime) / 1000);
@@ -336,7 +336,13 @@ function makeGuess(){
         guessBtn.style.backgroundColor = 'green';
     }
     else{
-        if(score<=2){
+        if(score==1){
+            msg.textContent = "Correct! You guessed in " + score + " try"+ ". Your score is good!";
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
+        playBtn.style.backgroundColor = 'green';
+        }
+        else if(score<=2){
             msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
