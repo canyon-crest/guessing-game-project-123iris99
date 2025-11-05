@@ -4,15 +4,13 @@ date.textContent = time();
 // global variables/constants
 
 let score, answer, level, userName;
-// let timerInterval, startTime;
+let timerInterval, startTime;
+let bestTime = localStorage.getItem('bestGuessingTime') || 'N/A'; // Store/retrieve best time
+document.getElementById('best-time').textContent = bestTime;
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
-const currentTimeElement = document.getElementById('currentTime');
-const fastestTimeElement = document.getElementById('fastestTime');
-let startTime;
-let timerInterval;
-let fastestTime = localStorage.getItem('fastestTime') || null; // Load fastest time from local storage
-// const timerDisplay = document.getElementById('timer');
+const timerArr = [];
+const timerDisplay = document.getElementById('timer');
 
 // event listeners
 playBtn.addEventListener("click", play);
@@ -288,12 +286,9 @@ function play(){
     }
     guess.placeholder = answer;
     score = 0;
-     startTime = Date.now();
-    startTimer();
-    displayFastestTime();
-    // startTime = Date.now();
-    // clearInterval(timerInterval);
-    // timerInterval = setInterval(updateTimer, 1000);
+    startTime = Date.now();
+    clearInterval(timerInterval);
+    timerInterval = setInterval(updateTimer, 1000);
 }
 
 const giveUpButton = document.getElementById('giveUpBtn');
@@ -311,35 +306,23 @@ function giveUpGame() {
     guess.disabled = true;
         for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = false;
+        clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
     }
     }
 }
 
-
-function startTimer() {
-    clearInterval(timerInterval); // Clear any existing timer
-    timerInterval = setInterval(() => {
-        const elapsedTime = (Date.now() - startTime) / 1000;
-        currentTimeElement.textContent = elapsedTime.toFixed(2);
-    }, 100);
+function updateTimer() {
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    timerDisplay.textContent = `${elapsedTime}s`;
 }
 
-function stopTimer() {
-    clearInterval(timerInterval);
+const finalTime = Math.floor((Date.now() - startTime) / 1000);
+function myTimer(){
+    timerArr.push(finalTime);
+    timerArr.sort((a, b) => a - b);
+    fastTime.textContent = "Fastest Time: " + timerArr[0];
 }
-
-function displayFastestTime() {
-    if (fastestTime) {
-        fastestTimeElement.textContent = parseFloat(fastestTime).toFixed(2) + ' seconds';
-    } else {
-        fastestTimeElement.textContent = 'N/A';
-    }
-}
-
-// function updateTimer() {
-//     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-//     timerDisplay.textContent = `${elapsedTime}s`;
-// }
 
 
 ////////////////////////////////////
@@ -381,25 +364,21 @@ function makeGuess(){
         msg.textContent = "Too high, guess again";
     }
     else{
-        const finalTime = (Date.now() - startTime) / 1000;
-        if (!fastestTime || finalTime < parseFloat(fastestTime)) {
-            fastestTime = finalTime.toString();
-            localStorage.setItem('fastestTime', fastestTime);
-            displayFastestTime();
         if(score<=2){
             msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
-        //     clearInterval(timerInterval);
-        // const finalTime = Math.floor((Date.now() - startTime) / 1000);
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
         }
         else if (score<=4 && score>=3){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is okay";
-        //     clearInterval(timerInterval);
-        // const finalTime = Math.floor((Date.now() - startTime) / 1000);
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
         }
         else if (score>=5){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is bad";
-        //     clearInterval(timerInterval);
-        // const finalTime = Math.floor((Date.now() - startTime) / 1000);
+            clearInterval(timerInterval);
+        const finalTime = Math.floor((Date.now() - startTime) / 1000);
+    
         }
         reset();
         updateScore();
@@ -464,7 +443,10 @@ function updateScore(){
     avgScore.textContent = "Average Score: " + Math.avg(avg + level);
 }
 }
-}
+    
+
+
+
 // //time
 // date.textContent = time();
 
