@@ -263,8 +263,10 @@ function time(){ //time
     }
     }
 }
-
+playBtn.style.backgroundColor = 'green';
 function play(){
+    playBtn.style.backgroundColor = '';
+    guessBtn.style.backgroundColor = 'green';
     playBtn.disabled = true;
     giveUpBtn.disabled = false;
     cb1.disabled = true;
@@ -291,27 +293,6 @@ function play(){
     timerInterval = setInterval(updateTimer, 1000);
 }
 
-const giveUpButton = document.getElementById('giveUpBtn');
-const gameStatus = document.getElementById('gameStatus');
-giveUpButton.addEventListener('click', giveUpGame)
-
-function giveUpGame() {
-    msg.textContent = "Game Over! The answer was: " + answer;
-    giveUpButton.disabled = true;
-    if(msg.textContent = "Game Over! The answer was: " + answer){
-        playBtn.disabled = false;
-    giveUpBtn.disabled = true;
-    cb1.disabled = false;
-    guessBtn.disabled = true;
-    guess.disabled = true;
-        for(let i=0; i<levelArr.length; i++){
-        levelArr[i].disabled = false;
-        clearInterval(timerInterval);
-        const finalTime = Math.floor((Date.now() - startTime) / 1000);
-    }
-    }
-}
-
 function updateTimer() {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
     timerDisplay.textContent = `${elapsedTime}s`;
@@ -325,31 +306,6 @@ function myTimer(){
 }
 
 
-////////////////////////////////////
-// document.getElementById("playBtn").addEventListener("click", stop);
-// let start = new Date().getTime();
-
-// function useTimer(){
-//     let stop = new Date().getTime();
-//     let time = (stop - start)/1000;
-//     document.getElementById("myTimer").innerHTML = time.toFixed(2);
-// }
-// let timer = setInterval(useTimer, 10);
-// function stop(){
-//     while()
-//         if(playBtn.disabled=true){
-//             timer = setInterval(useTimer, 10);
-//             document.getElementById("myTimer").innerHTML = "00:00:00"
-//         }
-
-//     else{
-//         clearInterval(timer);
-//         document.getElementById("myTimer").innerHTML = time.toFixed(2);
-//     }
-// }
-
-/////////////////////////
-
 function makeGuess(){
     let userGuess = parseInt(guess.value);
     if(isNaN(userGuess) || userGuess < 1 || userGuess > level){
@@ -359,26 +315,31 @@ function makeGuess(){
     score++;
     if(userGuess<answer){
         msg.textContent = "Too low, guess again";
+        guessBtn.style.backgroundColor = 'green';
     }
     else if(userGuess>answer){
         msg.textContent = "Too high, guess again";
+        guessBtn.style.backgroundColor = 'green';
     }
     else{
         if(score<=2){
             msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
+        playBtn.style.backgroundColor = 'green';
         }
         else if (score<=4 && score>=3){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is okay";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
+        playBtn.style.backgroundColor = 'green';
         }
         else if (score>=5){
             msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is bad";
             clearInterval(timerInterval);
         const finalTime = Math.floor((Date.now() - startTime) / 1000);
-    
+        playBtn.style.backgroundColor = 'green';
+
         }
         reset();
         updateScore();
@@ -414,6 +375,7 @@ function makeGuess(){
 
 function reset(){
     guessBtn.disabled = true;
+    guessBtn.style.backgroundColor = '';
     guess.value = "";
     guess.placeholder = "";
     guess.disabled = true;
@@ -439,7 +401,7 @@ function updateScore(){
         }
     }
     let avg = sum/scoreArr.length;
-    if(msg.textContent = "Game Over! The answer was: " + answer){
-    avgScore.textContent = "Average Score: " + Math.avg(avg + level);
+    avgScore.textContent = "Average Score: " + avg.toFixed(2);
 }
-}
+
+    
