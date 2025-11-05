@@ -282,7 +282,21 @@ function play(){
     userName = document.getElementById('messageInput').value;
         if (userName == ""){
             msg.textContent = "Please enter a name"
-        }
+            guess.disabled=true;
+            playBtn.style.backgroundColor = 'green';
+    guessBtn.style.backgroundColor = '';
+    playBtn.disabled = false;
+    giveUpBtn.disabled = true;
+    cb1.disabled = false;
+    guessBtn.disabled = true;
+    guess.disabled = true;
+    for(let i=0; i<levelArr.length; i++){
+        levelArr[i].disabled = false;
+        if(levelArr[i].checked){
+            level = levelArr[i].value;
+    }
+    }
+    }
         else{
     msg.textContent = "Hi " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! " + " Guess a number between 1-" + level;
     }
@@ -405,3 +419,7 @@ function updateScore(){
 }
 
     
+///add color meter (hot-to-cold)
+///achievement system (badges, awards)
+///guess history log
+///Power-Ups/Special Abilities: Introduce limited-use power-ups that can reveal information about the number or grant extra guesses.
