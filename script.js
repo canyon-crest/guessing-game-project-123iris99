@@ -364,7 +364,34 @@ function makeGuess(){
     reset();
     updateScore();
 }
+const myHint = document.getElementsByName("cb");
+    for(let i=0; i<myHint.length; i++){
+        if(myHint[i].checked){
+            if(Math.abs(userGuess-answer)==1){
+            msg.textContent += ". Your answer is very hot";
+            }
+            else if(Math.abs(userGuess-answer)==2 || Math.abs(userGuess-answer)==3){
+            msg.textContent += ". Your answer is hot";
+            }
+            else if(Math.abs(userGuess-answer)==4 || Math.abs(userGuess-answer)==5){
+            msg.textContent += ". Your answer is warm";
+            }
+            else if(Math.abs(userGuess-answer)==6 || Math.abs(userGuess-answer)==7){
+            msg.textContent += ". Your answer is lukewarm";
+            }
+            else{
+                if(answer!=userGuess){
+            msg.textContent += ". Your answer is cold";
+                }
+            }
+    return;
     }
+    else{
+        msg.textContent = msg.textContent;
+    }
+    }
+    }
+    
 
 function reset(){
     guessBtn.disabled = true;
