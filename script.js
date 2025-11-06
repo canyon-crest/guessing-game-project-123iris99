@@ -279,6 +279,7 @@ playBtn.style.backgroundColor = 'green';
 function play(){
     playBtn.style.backgroundColor = '';
     guessBtn.style.backgroundColor = 'green';
+    giveUpBtn.style.backgroundColor = 'red';
     playBtn.disabled = true;
     giveUpBtn.disabled = false;
     cb1.disabled = true;
@@ -297,11 +298,12 @@ function play(){
             guess.disabled=true;
             playBtn.style.backgroundColor = 'green';
     guessBtn.style.backgroundColor = '';
+    giveUpBtn.style.backgroundColor = '';
     playBtn.disabled = false;
-    giveUpBtn.disabled = true;
+    giveUpBtn.disabled = false;
     cb1.disabled = false;
-    guessBtn.disabled = true;
-    guess.disabled = true;
+    guessBtn.disabled = false;
+    guess.disabled=false;
     for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = false;
         if(levelArr[i].checked){
@@ -311,6 +313,7 @@ function play(){
     }
         else{
     msg.textContent = "Hi " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! " + " Guess a number between 1-" + level;
+    guessBtn.disabled = false;
     }
     guess.placeholder = answer;
     score = 0;
@@ -342,10 +345,12 @@ function makeGuess(){
     if(userGuess<answer){
         msg.textContent = "Too low, guess again";
         guessBtn.style.backgroundColor = 'green';
+        giveUpBtn.style.backgroundColor = 'red';
     }
     else if(userGuess>answer){
         msg.textContent = "Too high, guess again";
         guessBtn.style.backgroundColor = 'green';
+        giveUpBtn.style.backgroundColor = 'red';
     }
     else {
     // Player guessed correctly
@@ -407,16 +412,20 @@ const myHint = document.getElementsByName("cb");
     reset();
     playBtn.style.backgroundColor = 'green';
     giveUpBtn.disabled = true;
+    guessBtn.disabled = true;
 }
 
 function reset(){
-    guessBtn.disabled = true;
+
+const giveUpBtn = document.getElementById('giveUpBtn');
     guessBtn.style.backgroundColor = '';
+    giveUpBtn.style.backgroundColor = '';
     guess.value = "";
     guess.placeholder = "";
-    guess.disabled = true;
+    guess.disabled = false;
+    giveUpBtn.disabled = true;
+    guessBtn.disabled = true;
     playBtn.disabled = false;
-    giveUpBtn.disabled = false;
     cb1.disabled = false;
     for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = false;
