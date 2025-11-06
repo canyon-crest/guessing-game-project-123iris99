@@ -35,11 +35,11 @@ function displayTime() { //date
     const myTime = "Time: 12" + ":" + minutes + ":" + seconds +" am"
     document.getElementById('clock').textContent = myTime;
     }
-    else if(hours<12 || hours>=1){
+    else if(hours>=12 || hours<=23){
     const myTime = "Time: " + (hours-12) + ":" + minutes + ":" + seconds +" pm"
     document.getElementById('clock').textContent = myTime;
     }
-    else if(hours>=12 && hours<=23){
+    else if(hours<12 || hours>=1){
     const myTime = "Time: " + hours + ":" + minutes + ":" + seconds +" am"
     document.getElementById('clock').textContent = myTime;
     }
