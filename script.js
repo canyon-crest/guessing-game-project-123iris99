@@ -13,11 +13,11 @@ const timerDisplay = document.getElementById('timer');
 const avgTime = document.getElementById('avgTime');
 const fastTime = document.getElementById('fastTime');
 const giveUpBtn = document.getElementById('giveUpBtn');
-giveUpBtn.addEventListener('click', giveUp);
 
 // event listeners
 playBtn.addEventListener("click", play);
 guessBtn.addEventListener("click", makeGuess);
+giveUpBtn.addEventListener('click', giveUp);
 
 
 function displayTime() { //date
@@ -295,11 +295,11 @@ function play(){
     userName = document.getElementById('messageInput').value;
         if (userName == ""){
             msg.textContent = "Please enter a name"
-            guess.disabled=true;
             playBtn.style.backgroundColor = 'green';
     guessBtn.style.backgroundColor = '';
     giveUpBtn.style.backgroundColor = '';
     playBtn.disabled = false;
+    messageInput.disabled = false;
     giveUpBtn.disabled = false;
     cb1.disabled = false;
     guessBtn.disabled = false;
@@ -338,17 +338,17 @@ function myTimer(){
 function makeGuess(){
     let userGuess = parseInt(guess.value);
     if(isNaN(userGuess) || userGuess < 1 || userGuess > level){
-        msg.textContent = "INVALID, guess a number";
+        msg.textContent = userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + ", guess a number between 1-" + level;
         return;
     }
     score++;
     if(userGuess<answer){
-        msg.textContent = "Too low, guess again";
+        msg.textContent = userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + ", too low, guess again";
         guessBtn.style.backgroundColor = 'green';
         giveUpBtn.style.backgroundColor = 'red';
     }
     else if(userGuess>answer){
-        msg.textContent = "Too high, guess again";
+        msg.textContent = userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + ", too high, guess again";
         guessBtn.style.backgroundColor = 'green';
         giveUpBtn.style.backgroundColor = 'red';
     }
@@ -358,13 +358,16 @@ function makeGuess(){
     const finalTime = Math.floor((Date.now() - startTime) / 1000);
     timerArr.push(finalTime); // add this game's time
     updateAverageTime();
-
-    if(score <= 2){
-        msg.textContent = "Correct! You guessed in " + score + " tries. Your score is good!";
+    
+    if(score==1){
+        msg.textContent = "Correct " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! You guessed in " + score + " try. Your score is good!";
+    }
+    else if(score <= 2){
+        msg.textContent = "Correct " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! You guessed in " + score + " tries. Your score is good!";
     } else if(score <= 4){
-        msg.textContent = "Correct! You guessed in " + score + " tries. Your score is okay";
+        msg.textContent = "Correct " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! You guessed in " + score + " tries. Your score is okay.";
     } else {
-        msg.textContent = "Correct! You guessed in " + score + " tries. Your score is bad";
+        msg.textContent = "Correct " + userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + "! You guessed in " + score + " tries. Your score is bad.";
     }
 
     playBtn.style.backgroundColor = 'green';
@@ -405,7 +408,7 @@ const myHint = document.getElementsByName("cb");
     // Set score to max (the level), indicating "gave up"
     score = parseInt(level); // ensure it's a number
 
-    msg.textContent = "You gave up! The correct answer was " + answer + ". Your score is " + score;
+    msg.textContent = userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase() + ", you gave up! The correct answer was " + answer + ". Your score is " + score;
 
     // Update score and reset buttons
     updateScore();
@@ -426,6 +429,7 @@ const giveUpBtn = document.getElementById('giveUpBtn');
     giveUpBtn.disabled = true;
     guessBtn.disabled = true;
     playBtn.disabled = false;
+    messageInput.disabled = false;
     cb1.disabled = false;
     for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = false;
