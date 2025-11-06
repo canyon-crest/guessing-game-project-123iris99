@@ -53,7 +53,7 @@ function displayTime() { //date
     avgTime.textContent = "Average Time: " + avg.toFixed(2) + "s";
 
     // Optional: fastest time
-    fastTime.textContent = "Fastest Time: " + Math.min(...timerArr) + "s";
+    fastTime.textContent = "Fastest Time: " + Math.min(...timerArr) + ".00s";
 }
 
 ////////////////////////////////////////
@@ -302,10 +302,10 @@ function play(){
     giveUpBtn.style.backgroundColor = '';
     playBtn.disabled = false;
     messageInput.disabled = false;
-    giveUpBtn.disabled = false;
+    giveUpBtn.disabled = true;
     cb1.disabled = false;
-    guessBtn.disabled = false;
-    guess.disabled=false;
+    guessBtn.disabled = true;
+    guess.disabled=true;
     for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = false;
         if(levelArr[i].checked){
