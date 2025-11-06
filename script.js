@@ -12,6 +12,8 @@ const timerArr = [];
 const timerDisplay = document.getElementById('timer');
 const avgTime = document.getElementById('avgTime');
 const fastTime = document.getElementById('fastTime');
+const giveUpBtn = document.getElementById('giveUpBtn');
+giveUpBtn.addEventListener('click', giveUp);
 
 // event listeners
 playBtn.addEventListener("click", play);
@@ -392,6 +394,20 @@ const myHint = document.getElementsByName("cb");
     }
     }
     
+    function giveUp() {
+    clearInterval(timerInterval); // stop the timer
+
+    // Set score to max (the level), indicating "gave up"
+    score = parseInt(level); // ensure it's a number
+
+    msg.textContent = "You gave up! The correct answer was " + answer + ". Your score is " + score;
+
+    // Update score and reset buttons
+    updateScore();
+    reset();
+    playBtn.style.backgroundColor = 'green';
+    giveUpBtn.disabled = true;
+}
 
 function reset(){
     guessBtn.disabled = true;
