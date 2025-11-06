@@ -43,7 +43,7 @@ function displayTime() { //date
     const myTime = "Time: " + (hours-12) + ":" + minutes + ":" + seconds +" pm"
     document.getElementById('clock').textContent = myTime;
     }
-    }
+    } 
     displayTime();
     setInterval(displayTime, 1000);
 
