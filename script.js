@@ -5,19 +5,13 @@ date.textContent = time();
 
 let score, answer, level, userName;
 let timerInterval, startTime;
-let bestTime = localStorage.getItem('bestGuessingTime') || 'N/A';
-document.getElementById('best-time').textContent = bestTime;
+
 const levelArr = document.getElementsByName("level");
 const scoreArr = [];
 const timerArr = [];
 const timerDisplay = document.getElementById('timer');
-
-let fastestTime = localStorage.getItem('fastestRoundTime');
-if (fastestTime) {
-    document.getElementById('fast-time').textContent = "Fastest Time: " + fastestTime + "s";
-} else {
-    document.getElementById('fast-time').textContent = "Fastest Time: N/A";
-}
+const avgTime = document.getElementById('avgTime');
+const fastTime = document.getElementById('fastTime');
 
 // event listeners
 playBtn.addEventListener("click", play);
@@ -49,9 +43,18 @@ function displayTime() { //date
     displayTime();
     setInterval(displayTime, 1000);
 
+    function updateAverageTime() {
+    const sum = timerArr.reduce((acc, t) => acc + t, 0);
+    const avg = sum / timerArr.length;
+    avgTime.textContent = "Average Time: " + avg.toFixed(2) + "s";
+
+    // Optional: fastest time
+    fastTime.textContent = "Fastest Time: " + Math.min(...timerArr) + "s";
+}
+
 ////////////////////////////////////////
 
-function time(){
+function time(){ //time
     let d = new Date();
     if((d.getMonth() + 1)==1){
         if((d.getDate())>=4 && (d.getDate())<=20){
@@ -316,7 +319,14 @@ function play(){
 
 function updateTimer() {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    timerDisplay.textContent = elapsedTime + "s";
+    timerDisplay.textContent = `${elapsedTime}s`;
+}
+
+const finalTime = Math.floor((Date.now() - startTime) / 1000);
+function myTimer(){
+    timerArr.push(finalTime);
+    timerArr.sort((a, b) => a - b);
+    fastTime.textContent = "Fastest Time: " + timerArr[0];
 }
 
 
@@ -335,88 +345,25 @@ function makeGuess(){
         msg.textContent = "Too high, guess again";
         guessBtn.style.backgroundColor = 'green';
     }
-    else{
-        if(score==1){
-            msg.textContent = "Correct! You guessed in " + score + " try"+ ". Your score is good!";
-            clearInterval(timerInterval);
-const finalTime = Math.floor((Date.now() - startTime) / 1000);
-playBtn.style.backgroundColor = 'green';
-if (!fastestTime || finalTime < fastestTime) {
-    fastestTime = finalTime;
-    localStorage.setItem('fastestRoundTime', fastestTime);
-    document.getElementById('fast-time').textContent = "Fastest Time: " + fastestTime + "s";
-}
-        }
-        else if(score<=2){
-            msg.textContent = "Correct! You guessed in " + score + " tries"+ ". Your score is good!";
-            clearInterval(timerInterval);
-const finalTime = Math.floor((Date.now() - startTime) / 1000);
-playBtn.style.backgroundColor = 'green';
-if (!fastestTime || finalTime < fastestTime) {
-    fastestTime = finalTime;
-    localStorage.setItem('fastestRoundTime', fastestTime);
-    document.getElementById('fast-time').textContent = "Fastest Time: " + fastestTime + "s";
-}
-        }
-        else if (score<=4 && score>=3){
-            msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is okay";
-            clearInterval(timerInterval);
-const finalTime = Math.floor((Date.now() - startTime) / 1000);
-playBtn.style.backgroundColor = 'green';
-if (!fastestTime || finalTime < fastestTime) {
-    fastestTime = finalTime;
-    localStorage.setItem('fastestRoundTime', fastestTime);
-    document.getElementById('fast-time').textContent = "Fastest Time: " + fastestTime + "s";
-}
-        }
-        else if (score>=5){
-            msg.textContent = "Correct! You guessed in " + score + " tries" + ". Your score is bad";
-            clearInterval(timerInterval);
-const finalTime = Math.floor((Date.now() - startTime) / 1000);
-playBtn.style.backgroundColor = 'green';
-if (!fastestTime || finalTime < fastestTime) {
-    fastestTime = finalTime;
-    localStorage.setItem('fastestRoundTime', fastestTime);
-    document.getElementById('fast-time').textContent = "Fastest Time: " + fastestTime + "s";
-}
-        }
-        reset();
-        updateScore();
+    else {
+    // Player guessed correctly
+    clearInterval(timerInterval);
+    const finalTime = Math.floor((Date.now() - startTime) / 1000);
+    timerArr.push(finalTime); // add this game's time
+    updateAverageTime();
 
+    if(score <= 2){
+        msg.textContent = "Correct! You guessed in " + score + " tries. Your score is good!";
+    } else if(score <= 4){
+        msg.textContent = "Correct! You guessed in " + score + " tries. Your score is okay";
+    } else {
+        msg.textContent = "Correct! You guessed in " + score + " tries. Your score is bad";
     }
 
-if (!fastestTime || finalTime < fastestTime) {
-    fastestTime = finalTime;
-    localStorage.setItem('fastestRoundTime', fastestTime);
-    document.getElementById('fast-time').textContent = "Fastest Time: " + fastestTime + "s";
+    playBtn.style.backgroundColor = 'green';
+    reset();
+    updateScore();
 }
-
-    const myHint = document.getElementsByName("cb");
-    for(let i=0; i<myHint.length; i++){
-        if(myHint[i].checked){
-            if(Math.abs(userGuess-answer)==1){
-            msg.textContent += ". Your answer is very hot";
-            }
-            else if(Math.abs(userGuess-answer)==2 || Math.abs(userGuess-answer)==3){
-            msg.textContent += ". Your answer is hot";
-            }
-            else if(Math.abs(userGuess-answer)==4 || Math.abs(userGuess-answer)==5){
-            msg.textContent += ". Your answer is warm";
-            }
-            else if(Math.abs(userGuess-answer)==6 || Math.abs(userGuess-answer)==7){
-            msg.textContent += ". Your answer is lukewarm";
-            }
-            else{
-                if(answer!=userGuess){
-            msg.textContent += ". Your answer is cold";
-                }
-            }
-    return;
-    }
-    else{
-        msg.textContent = msg.textContent;
-    }
-    }
     }
 
 function reset(){
