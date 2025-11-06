@@ -13,6 +13,8 @@ const timerDisplay = document.getElementById('timer');
 const avgTime = document.getElementById('avgTime');
 const fastTime = document.getElementById('fastTime');
 const giveUpBtn = document.getElementById('giveUpBtn');
+const badgeList = document.getElementById('badgeList');
+const badges = new Set();
 
 // event listeners
 playBtn.addEventListener("click", play);
@@ -377,30 +379,58 @@ function makeGuess(){
 const myHint = document.getElementsByName("cb");
     for(let i=0; i<myHint.length; i++){
         if(myHint[i].checked){
-            if(Math.abs(userGuess-answer)==1){
-            msg.textContent += ". Your answer is very hot";
-            }
-            else if(Math.abs(userGuess-answer)==2 || Math.abs(userGuess-answer)==3){
-            msg.textContent += ". Your answer is hot";
-            }
-            else if(Math.abs(userGuess-answer)==4 || Math.abs(userGuess-answer)==5){
-            msg.textContent += ". Your answer is warm";
-            }
-            else if(Math.abs(userGuess-answer)==6 || Math.abs(userGuess-answer)==7){
-            msg.textContent += ". Your answer is lukewarm";
-            }
-            else{
-                if(answer!=userGuess){
-            msg.textContent += ". Your answer is cold";
+            const distance = Math.abs(userGuess - answer);
+updateColorMeter(distance);
+
+if(distance == 0){
+    msg.textContent = msg.textContent;
+}
+else if(distance == 1){
+    msg.textContent += ". Your answer is very hot";
+} else if(distance <= 3){
+    msg.textContent += ". Your answer is hot";
+} else if(distance <= 5){
+    msg.textContent += ". Your answer is warm";
+} else if(distance <= 7){
+    msg.textContent += ". Your answer is lukewarm";
+} else{
+    msg.textContent += ". Your answer is cold";
+}
                 }
             }
+            if(score === 1){
+    unlockBadge("🎯 Perfect Score");
+} else if(score <= 2){
+    unlockBadge("👍 Good Score");
+}
+
+// Speed-based badges
+if(finalTime <= 5){ // e.g., under 5 seconds
+    unlockBadge("⚡ Speedster");
+} else if(finalTime <= 15){
+    unlockBadge("⏱ Quick Thinker");
+}
     return;
+
     }
-    else{
-        msg.textContent = msg.textContent;
+
+    function updateColorMeter(distance) {
+    const meter = document.getElementById('colorMeter');
+
+    if(distance === 0){
+        meter.style.backgroundColor = '#D4AF37'; // correct
+    } else if(distance === 1){
+        meter.style.backgroundColor = '#D1001F'; // very hot
+    } else if(distance <= 3){
+        meter.style.backgroundColor = '#FF6701'; // hot
+    } else if(distance <= 5){
+        meter.style.backgroundColor = '#FFF380'; // warm
+    } else if(distance <= 7){
+        meter.style.backgroundColor = '#8EC3E6'; // lukewarm
+    } else {
+        meter.style.backgroundColor = '#3A5D9C'; // cold
     }
-    }
-    }
+}
     
     function giveUp() {
     clearInterval(timerInterval); // stop the timer
@@ -416,6 +446,10 @@ const myHint = document.getElementsByName("cb");
     playBtn.style.backgroundColor = 'green';
     giveUpBtn.disabled = true;
     guessBtn.disabled = true;
+
+    if(score === parseInt(level)){
+    unlockBadge("🤷‍♂️ Quitter"); // could be fun/encouraging
+}
 }
 
 function reset(){
@@ -451,6 +485,22 @@ function updateScore(){
     }
     let avg = sum/scoreArr.length;
     avgScore.textContent = "Average Score: " + avg.toFixed(2);
+
+    if(scoreArr.length >= 5){
+    unlockBadge("🏆 5 Wins Streak");
+}
+if(avgScore.textContent < 2){
+    unlockBadge("🥇 Consistent Player");
+}
+}
+
+function unlockBadge(name) {
+    if(!badges.has(name)) {
+        badges.add(name);
+        const li = document.createElement('li');
+        li.textContent = name;
+        badgeList.appendChild(li);
+    }
 }
 
     
